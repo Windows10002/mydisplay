@@ -1,10 +1,10 @@
-import { planetMedia } from './planetMedia'
+import { planetMedia, planetStatic } from './planetMedia'
 
 export const SUN_AIGC_VIDEO =
   import.meta.env.VITE_SUN_AIGC_VIDEO || planetMedia('aigc作品.mp4')
 export const VENUS_PORTFOLIO_VIDEO =
   import.meta.env.VITE_VENUS_PORTFOLIO_VIDEO || planetMedia('作品集.mp4')
-export const SCHOLARSHIP_IMAGE = planetMedia('国家奖学金.jpg')
+export const SCHOLARSHIP_IMAGE = planetStatic('国家奖学金.jpg')
 
 export const AWARD_SLIDESHOW = [
   '参赛奖状/飞身上篮技能赛一等奖.png',
@@ -20,4 +20,4 @@ export const AWARD_SLIDESHOW = [
   '参赛奖状/“菱朗杯”第九届广东省汽车与农机电子环保大赛广东省三等奖.png',
   '参赛奖状/华为认证证书.png',
   '参赛奖状/学生助理.jpg',
-].map(planetMedia)
+].map(planetStatic)
