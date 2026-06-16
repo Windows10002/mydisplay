@@ -1,9 +1,15 @@
 import { planetMedia, planetStatic } from './planetMedia'
 
+const SUN_AIGC_BILIBILI = 'https://www.bilibili.com/video/BV1r6jg6CEfa/'
+const VENUS_PORTFOLIO_BILIBILI = 'https://www.bilibili.com/video/BV1w6jg6yE4B/'
+
+/** 生产默认 B 站；本地开发仍可用 Planets/*.mp4 */
 export const SUN_AIGC_VIDEO =
-  import.meta.env.VITE_SUN_AIGC_VIDEO || planetMedia('aigc作品.mp4')
+  import.meta.env.VITE_SUN_AIGC_VIDEO ||
+  (import.meta.env.DEV ? planetMedia('aigc作品.mp4') : SUN_AIGC_BILIBILI)
 export const VENUS_PORTFOLIO_VIDEO =
-  import.meta.env.VITE_VENUS_PORTFOLIO_VIDEO || planetMedia('作品集.mp4')
+  import.meta.env.VITE_VENUS_PORTFOLIO_VIDEO ||
+  (import.meta.env.DEV ? planetMedia('作品集.mp4') : VENUS_PORTFOLIO_BILIBILI)
 export const SCHOLARSHIP_IMAGE = planetStatic('国家奖学金.jpg')
 
 export const AWARD_SLIDESHOW = [

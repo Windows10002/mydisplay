@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { getPlanetArchive, getPlanetEnvironment } from '../../data/planetEnvironments'
+import { bilibiliEmbedUrl, isBilibiliUrl } from '../../utils/bilibili'
 import { renderPlanetEnvironment } from '../../utils/planetEnvironmentRenderer'
 import { setupPixelCanvas } from '../../utils/pixelCanvas'
 import { playBeep } from '../../utils/sound'
@@ -21,11 +22,13 @@ import './PixelLightbox.css'
 export default function PlanetEnvironment({ planetId, onBack }) {
   const canvasRef = useRef(null)
   const videoRef = useRef(null)
+  const embedRef = useRef(null)
   const env = getPlanetEnvironment(planetId)
   const archive = getPlanetArchive(planetId)
   const [showFacts, setShowFacts] = useState(false)
   const [mediaActive, setMediaActive] = useState(false)
   const hasVideo = Boolean(env?.video)
+  const isBilibili = isBilibiliUrl(env?.video)
 
   useEffect(() => {
     playPlanetEnvironmentEnter()
@@ -37,13 +40,15 @@ export default function PlanetEnvironment({ planetId, onBack }) {
     if (document.fullscreenElement) {
       document.exitFullscreen().catch(() => {})
     }
-    const v = videoRef.current
-    if (v) {
-      v.pause()
-      v.muted = true
+    if (!isBilibili) {
+      const v = videoRef.current
+      if (v) {
+        v.pause()
+        v.muted = true
+      }
     }
     setMediaActive(false)
-  }, [])
+  }, [isBilibili])
 
   useEffect(() => {
     const onKey = (e) => {
@@ -58,10 +63,12 @@ export default function PlanetEnvironment({ planetId, onBack }) {
     }
     const onFsChange = () => {
       if (!document.fullscreenElement && mediaActive) {
-        const v = videoRef.current
-        if (v) {
-          v.pause()
-          v.muted = true
+        if (!isBilibili) {
+          const v = videoRef.current
+          if (v) {
+            v.pause()
+            v.muted = true
+          }
         }
         setMediaActive(false)
       }
@@ -72,7 +79,15 @@ export default function PlanetEnvironment({ planetId, onBack }) {
       window.removeEventListener('keydown', onKey)
       document.removeEventListener('fullscreenchange', onFsChange)
     }
-  }, [mediaActive, onBack, exitFullscreen])
+  }, [mediaActive, onBack, exitFullscreen, isBilibili])
+
+  useEffect(() => {
+    if (!mediaActive || !isBilibili) return undefined
+    const el = embedRef.current
+    if (!el?.requestFullscreen) return undefined
+    el.requestFullscreen().catch(() => {})
+    return undefined
+  }, [mediaActive, isBilibili])
 
   useEffect(() => {
     if (!env || hasVideo) return undefined
@@ -135,10 +150,12 @@ export default function PlanetEnvironment({ planetId, onBack }) {
   }
 
   const engageVideo = async () => {
-    const v = videoRef.current
-    if (!v) return
     playPlanetSelect()
     setMediaActive(true)
+    if (isBilibili) return
+
+    const v = videoRef.current
+    if (!v) return
     v.muted = false
     v.currentTime = 0
     try {
@@ -146,13 +163,30 @@ export default function PlanetEnvironment({ planetId, onBack }) {
       if (v.requestFullscreen) await v.requestFullscreen()
       else if (v.webkitEnterFullscreen) v.webkitEnterFullscreen()
     } catch {
-      setMediaActive(true)
+      /* keep overlay active even if autoplay blocked */
     }
   }
 
   return (
     <div className={`planet-env planet-env--${planetId} ${hasVideo ? 'planet-env--has-video' : ''} ${mediaActive ? 'planet-env--media-active' : ''}`} role="dialog" aria-label={`${env.label}环境`}>
-      {hasVideo && (
+      {hasVideo && isBilibili && (
+        <div
+          ref={embedRef}
+          className={`planet-env__embed ${mediaActive ? 'planet-env__embed--active' : ''}`}
+        >
+          {mediaActive && (
+            <iframe
+              className="planet-env__embed-frame"
+              src={bilibiliEmbedUrl(env.video, { autoplay: true })}
+              title={`${env.label} · Bilibili`}
+              allow="autoplay; fullscreen; encrypted-media"
+              allowFullScreen
+              referrerPolicy="no-referrer"
+            />
+          )}
+        </div>
+      )}
+      {hasVideo && !isBilibili && (
         <video
           ref={videoRef}
           className={`planet-env__video ${mediaActive ? 'planet-env__video--active' : ''}`}
