@@ -9,3 +9,5 @@ dist-ssr
 Planets/
 public/Planets/
 public/assets/intro-pixel.mp4
+public/intro.raw
+*.raw
