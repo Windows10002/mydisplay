@@ -1,0 +1,677 @@
+/* ── 行星表面资料 · 差异化布局 ── */
+.pdp-surface {
+  position: fixed;
+  z-index: 12;
+  pointer-events: none;
+}
+
+.pdp-surface > * {
+  pointer-events: auto;
+}
+
+/* 浮层 archive 不遮挡顶部「返回轨道」等 HUD */
+.pdp-surface > .jupiter-orbit,
+.pdp-surface > .saturn-scholar,
+.pdp-surface > .neptune-comms,
+.pdp-surface > .mercury-resume,
+.pdp-surface > .earth-trees,
+.pdp-surface > .mars-projector,
+.pdp-surface > .uranus-drift {
+  pointer-events: none;
+}
+
+.pdp-surface__facts,
+.pdp-surface__archive {
+  animation: pdp-in 0.28s steps(4) forwards;
+}
+
+@keyframes pdp-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.pdp-facts__title,
+.pdp-archive__title {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.14em;
+  color: var(--color-cold, #80e8ff);
+  margin: 0 0 10px;
+  padding-bottom: 6px;
+  border-bottom: 1px dashed rgba(154, 168, 184, 0.3);
+}
+
+/* ── 水星：居中简历 ── */
+.pdp-surface--mercury {
+  inset: 0;
+  pointer-events: none;
+}
+
+.pdp-surface--mercury .pdp-surface__archive {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: none;
+  transform: none;
+  pointer-events: none;
+}
+
+.pdp-surface--mercury.pdp-surface--facts-open .pdp-surface__facts {
+  position: fixed;
+  top: 88px;
+  right: 22px;
+  width: min(340px, calc(100vw - 44px));
+  pointer-events: auto;
+}
+
+.pdp-surface--jupiter,
+.pdp-surface--saturn,
+.pdp-surface--uranus,
+.pdp-surface--mars,
+.pdp-surface--neptune {
+  inset: 0;
+  pointer-events: none;
+}
+
+.pdp-surface--jupiter .pdp-surface__archive,
+.pdp-surface--saturn .pdp-surface__archive,
+.pdp-surface--uranus .pdp-surface__archive,
+.pdp-surface--mars .pdp-surface__archive,
+.pdp-surface--neptune .pdp-surface__archive {
+  animation: none;
+  transform: none;
+}
+
+.pdp-surface--saturn .pdp-surface__archive.saturn-scholar {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.pdp-surface--neptune .pdp-surface__archive.neptune-comms {
+  position: fixed;
+  left: 50%;
+  right: auto;
+  top: 54%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.pdp-surface--neptune .pdp-surface__archive {
+  position: static;
+  pointer-events: none;
+}
+
+.pdp-surface--jupiter.pdp-surface--facts-open .pdp-surface__facts,
+.pdp-surface--saturn.pdp-surface--facts-open .pdp-surface__facts,
+.pdp-surface--uranus.pdp-surface--facts-open .pdp-surface__facts {
+  position: fixed;
+  top: 88px;
+  right: 22px;
+  width: min(340px, calc(100vw - 44px));
+  pointer-events: auto;
+}
+
+.pdp-facts--telemetry,
+.pdp-archive--dossier,
+.pdp-facts--default,
+.pdp-archive--default {
+  padding: 14px 16px;
+  border: 1px solid rgba(154, 168, 184, 0.35);
+  background: rgba(8, 12, 24, 0.88);
+}
+
+.pdp-facts__telemetry-row {
+  display: grid;
+  grid-template-columns: 4.5em 1fr;
+  gap: 8px 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(46, 61, 82, 0.45);
+  animation: pdp-scan-in 0.3s steps(3) backwards;
+}
+
+.pdp-facts__telemetry-row:last-child {
+  border-bottom: none;
+}
+
+.pdp-facts__telemetry-key {
+  font-family: var(--font-mono);
+  font-size: 0.5rem;
+  letter-spacing: 0.12em;
+  color: #b8b8b8;
+}
+
+.pdp-facts__telemetry-val {
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  line-height: 1.45;
+  color: #9aa8b8;
+}
+
+@keyframes pdp-scan-in {
+  from { opacity: 0; transform: translateX(-6px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.pdp-archive__dossier {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.pdp-archive__dossier-line {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  line-height: 1.5;
+  color: #d4dce8;
+  padding: 4px 0;
+  border-left: 2px solid #8a8a8a;
+  padding-left: 10px;
+}
+
+/* ── 地球：底卡片 + 右上轨道格 ── */
+.pdp-surface--earth {
+  inset: auto 0 0 0;
+  pointer-events: none;
+}
+
+.pdp-surface--earth .pdp-surface__archive {
+  position: static;
+  pointer-events: none;
+}
+
+.pdp-surface--earth .pdp-surface__archive.earth-trees {
+  position: fixed;
+  animation: none;
+  transform: translateX(-50%);
+}
+
+.pdp-surface--earth.pdp-surface--facts-open .pdp-surface__facts {
+  position: fixed;
+  top: 88px;
+  right: 22px;
+  width: min(340px, calc(100vw - 44px));
+  pointer-events: auto;
+}
+
+.pdp-surface--mars .pdp-surface__archive {
+  position: static;
+  pointer-events: none;
+}
+
+.pdp-facts--orbit-grid {
+  padding: 12px;
+  border: 1px solid rgba(128, 232, 255, 0.35);
+  background: rgba(4, 16, 32, 0.9);
+}
+
+.pdp-facts__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.pdp-facts__grid-cell {
+  padding: 8px;
+  border: 1px solid rgba(46, 100, 140, 0.5);
+  background: rgba(10, 40, 72, 0.45);
+}
+
+.pdp-facts__grid-key {
+  font-family: var(--font-mono);
+  font-size: 0.48rem;
+  color: #8ec8e8;
+  letter-spacing: 0.1em;
+}
+
+.pdp-facts__grid-val {
+  margin: 4px 0 0;
+  font-size: 0.62rem;
+  line-height: 1.4;
+  color: #9aa8b8;
+}
+
+.pdp-archive__cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 8px;
+}
+
+.pdp-archive--cards {
+  padding: 14px;
+  border: 1px solid rgba(128, 232, 255, 0.3);
+  background: rgba(4, 16, 32, 0.85);
+}
+
+.pdp-archive__card {
+  padding: 10px 12px;
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  line-height: 1.45;
+  color: #d4dce8;
+  border: 1px solid rgba(46, 110, 168, 0.45);
+  background: rgba(8, 24, 48, 0.65);
+}
+
+/* ── 火星：投影放映 + 证书框 ── */
+.pdp-surface--mars {
+  inset: auto auto 0 22px;
+  display: block;
+  max-width: calc(100vw - 44px);
+}
+
+.pdp-surface--mars.pdp-surface--facts-open .pdp-surface__facts {
+  position: fixed;
+  top: auto;
+  bottom: 140px;
+  left: 22px;
+  max-width: 380px;
+}
+
+.pdp-facts--rover-log {
+  padding: 12px;
+  border: 1px solid rgba(216, 120, 80, 0.4);
+  background: rgba(18, 8, 8, 0.9);
+}
+
+.pdp-facts__rover {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.pdp-facts__rover-entry {
+  padding: 8px 0;
+  border-bottom: 1px dashed rgba(184, 74, 40, 0.35);
+  font-size: 0.65rem;
+  color: #9aa8b8;
+}
+
+.pdp-facts__rover-id {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.42rem;
+  color: #d87850;
+  margin-bottom: 2px;
+}
+
+.pdp-archive--timeline {
+  padding: 14px;
+  border: 1px solid rgba(216, 120, 80, 0.35);
+  background: rgba(18, 8, 8, 0.85);
+}
+
+.pdp-archive__timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.pdp-archive__timeline-item {
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+  padding: 8px 0;
+  border-left: 2px solid #b84a28;
+  padding-left: 12px;
+  margin-left: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: #d4dce8;
+}
+
+.pdp-archive__timeline-year {
+  flex-shrink: 0;
+  color: #d87850;
+  font-size: 0.52rem;
+}
+
+/* ── 木星：分层色带 + 层叠实习 ── */
+.pdp-surface--jupiter {
+  inset: auto 22px 56px 22px;
+  max-width: min(720px, calc(100vw - 44px));
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.pdp-facts--bands {
+  padding: 0;
+  border: 1px solid rgba(184, 137, 90, 0.35);
+  background: rgba(10, 8, 16, 0.88);
+  overflow: hidden;
+}
+
+.pdp-facts__band {
+  padding: 10px 14px;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.35);
+}
+
+.pdp-facts__band[data-band='0'] { background: rgba(138, 96, 48, 0.35); }
+.pdp-facts__band[data-band='1'] { background: rgba(184, 137, 90, 0.28); }
+.pdp-facts__band[data-band='2'] { background: rgba(220, 200, 160, 0.18); }
+.pdp-facts__band[data-band='3'] { background: rgba(154, 112, 64, 0.32); }
+
+.pdp-facts__band-key {
+  font-family: var(--font-mono);
+  font-size: 0.5rem;
+  color: #dcc8a0;
+}
+
+.pdp-facts__band-val {
+  margin: 4px 0 0;
+  font-size: 0.65rem;
+  color: #9aa8b8;
+}
+
+.pdp-archive--layers {
+  padding: 14px;
+  border: 1px solid rgba(184, 137, 90, 0.35);
+  background: rgba(10, 8, 16, 0.85);
+}
+
+.pdp-archive__layers {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.pdp-archive__layer {
+  position: relative;
+  padding: 10px 14px;
+  margin-top: -4px;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  color: #d4dce8;
+  border: 1px solid rgba(184, 137, 90, 0.4);
+  background: rgba(26, 20, 32, 0.9);
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.4);
+}
+
+/* ── 土星：环段 + 铭牌 ── */
+.pdp-surface--saturn {
+  inset: auto 0 56px 0;
+  padding: 0 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.pdp-facts--ring-segments {
+  width: min(680px, 100%);
+  padding: 12px;
+  border: 1px solid rgba(216, 200, 152, 0.35);
+  background: rgba(12, 10, 8, 0.88);
+}
+
+.pdp-facts__rings {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+
+.pdp-facts__ring-seg {
+  flex: 1 1 140px;
+  padding: 8px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(216, 200, 152, 0.45);
+  background: rgba(26, 24, 16, 0.65);
+  font-size: 0.62rem;
+  color: #9aa8b8;
+}
+
+.pdp-facts__ring-key {
+  font-family: var(--font-mono);
+  font-size: 0.46rem;
+  color: #f0e8c8;
+}
+
+.pdp-archive--plaque {
+  width: min(360px, 100%);
+  padding: 18px 20px;
+  text-align: center;
+  border: 2px solid rgba(216, 200, 152, 0.5);
+  background: rgba(12, 10, 8, 0.9);
+}
+
+.pdp-archive__plaque p {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  line-height: 1.6;
+  color: #f0e8c8;
+  margin: 4px 0;
+}
+
+/* ── 天王：侧倾面板 + 冰列表 ── */
+.pdp-surface--uranus {
+  inset: auto auto 56px 22px;
+  display: flex;
+  gap: 14px;
+  align-items: flex-end;
+  max-width: calc(100vw - 44px);
+}
+
+.pdp-facts--tilt-panel {
+  transform: rotate(-3deg);
+  transform-origin: bottom left;
+  padding: 14px;
+  border: 1px solid rgba(126, 200, 220, 0.4);
+  background: rgba(6, 12, 20, 0.9);
+  max-width: 360px;
+}
+
+.pdp-facts__tilt-row {
+  margin-bottom: 8px;
+}
+
+.pdp-facts__tilt-row dt {
+  font-family: var(--font-mono);
+  font-size: 0.5rem;
+  color: #b0e8f0;
+}
+
+.pdp-facts__tilt-row dd {
+  margin: 2px 0 0;
+  font-size: 0.65rem;
+  color: #9aa8b8;
+}
+
+.pdp-archive--ice-list {
+  padding: 14px;
+  border: 1px solid rgba(126, 200, 220, 0.35);
+  background: rgba(6, 12, 20, 0.85);
+  min-width: 220px;
+}
+
+.pdp-archive__ice {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.pdp-archive__ice li {
+  padding: 8px 10px;
+  margin-bottom: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  color: #d4dce8;
+  border: 1px solid rgba(176, 232, 240, 0.25);
+  background: rgba(10, 24, 40, 0.5);
+}
+
+/* ── 海王：流式 + 胶囊邮件 ── */
+.pdp-surface--neptune.pdp-surface--facts-open .pdp-surface__facts {
+  position: fixed;
+  top: 88px;
+  right: 22px;
+  width: min(340px, calc(100vw - 44px));
+  pointer-events: auto;
+}
+
+.pdp-facts--data-stream {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid rgba(58, 82, 196, 0.45);
+  background: rgba(4, 8, 24, 0.92);
+}
+
+.pdp-facts__stream {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.pdp-facts__stream-item {
+  display: flex;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(58, 82, 196, 0.25);
+  font-size: 0.64rem;
+  color: #9aa8b8;
+}
+
+.pdp-facts__stream-bar {
+  flex-shrink: 0;
+  width: 3px;
+  background: linear-gradient(180deg, #6888e0, transparent);
+  animation: pdp-stream-pulse 1.2s steps(3) infinite;
+}
+
+@keyframes pdp-stream-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.pdp-archive--signal {
+  width: 100%;
+  padding: 14px;
+  border: 1px solid rgba(58, 82, 196, 0.4);
+  background: rgba(4, 8, 24, 0.88);
+}
+
+.pdp-archive__signal {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.pdp-archive__signal-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 0;
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  color: #d4dce8;
+}
+
+.pdp-archive__signal-bars {
+  display: flex;
+  gap: 2px;
+  align-items: flex-end;
+  height: 12px;
+}
+
+.pdp-archive__signal-bars i {
+  display: block;
+  width: 3px;
+  background: #283050;
+}
+
+.pdp-archive__signal-bars i:nth-child(1) { height: 4px; }
+.pdp-archive__signal-bars i:nth-child(2) { height: 7px; }
+.pdp-archive__signal-bars i:nth-child(3) { height: 10px; }
+.pdp-archive__signal-bars i:nth-child(4) { height: 12px; }
+
+.pdp-archive__signal-bars i.is-on {
+  background: #6888e0;
+}
+
+/* ── 太阳 / 金星 · 仅 facts 浮层 ── */
+.pdp-facts--flare {
+  padding: 14px;
+  border: 1px solid rgba(255, 184, 74, 0.45);
+  background: rgba(26, 8, 0, 0.9);
+}
+
+.pdp-facts__flare {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.pdp-facts__flare-tag {
+  flex: 1 1 140px;
+  padding: 8px;
+  border: 1px solid rgba(255, 184, 74, 0.35);
+  background: rgba(58, 24, 8, 0.5);
+  font-size: 0.62rem;
+  color: #9aa8b8;
+}
+
+.pdp-facts__flare-tag span {
+  font-family: var(--font-mono);
+  font-size: 0.48rem;
+  color: #ffb84a;
+}
+
+.pdp-facts--corrupted {
+  padding: 14px;
+  border: 1px solid rgba(196, 160, 106, 0.4);
+  background: rgba(26, 16, 8, 0.92);
+}
+
+.pdp-facts__corrupt-row dt {
+  font-family: var(--font-mono);
+  font-size: 0.5rem;
+  color: #e8c878;
+  text-shadow: 1px 0 #c4a06a;
+}
+
+.pdp-facts__corrupt-row dd {
+  margin: 4px 0 10px;
+  font-size: 0.65rem;
+  color: #a89878;
+}
+
+.planet-env__facts-overlay {
+  position: fixed;
+  left: 50%;
+  bottom: 56px;
+  transform: translateX(-50%);
+  z-index: 12;
+  width: min(480px, calc(100vw - 32px));
+  max-height: calc(100vh - 160px);
+  overflow-y: auto;
+}
+
+@media (max-width: 720px) {
+  .pdp-surface--mercury.pdp-surface--facts-open,
+  .pdp-surface--mars,
+  .pdp-surface--uranus {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .pdp-surface--mercury .pdp-surface__facts,
+  .pdp-surface--mercury.pdp-surface--facts-open .pdp-surface__archive {
+    width: 100%;
+    max-width: none;
+  }
+
+  .pdp-surface--earth.pdp-surface--facts-open .pdp-surface__facts {
+    position: static;
+    width: 100%;
+    margin-bottom: 12px;
+  }
+
+  .pdp-facts__grid {
+    grid-template-columns: 1fr;
+  }
+}

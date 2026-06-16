@@ -1,0 +1,68 @@
+.saturn-scholar {
+  position: fixed;
+  left: 50%;
+  top: calc(52vh + min(22vw, 200px));
+  transform: translateX(-50%);
+  z-index: 13;
+  pointer-events: none;
+}
+
+.saturn-scholar__medal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 14px 28px;
+  border: 2px solid rgba(216, 200, 152, 0.55);
+  background: rgba(12, 10, 8, 0.72);
+  cursor: pointer;
+  pointer-events: auto;
+  transition: border-color 0.15s, transform 0.15s steps(2);
+  animation: saturn-medal-float 4s ease-in-out infinite;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
+}
+
+.saturn-scholar__medal:hover {
+  border-color: #f0e8c8;
+  transform: translateY(-2px);
+  animation: none;
+}
+
+.saturn-scholar__year {
+  font-family: var(--font-mono);
+  font-size: 0.5rem;
+  color: #d8c898;
+  letter-spacing: 0.12em;
+}
+
+.saturn-scholar__title {
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  letter-spacing: 0.1em;
+  color: #f0e8c8;
+  text-shadow: 0 0 12px rgba(240, 232, 200, 0.25);
+}
+
+.saturn-scholar__meta {
+  font-family: var(--font-mono);
+  font-size: 0.48rem;
+  color: rgba(216, 200, 152, 0.85);
+}
+
+.saturn-scholar__hint {
+  margin-top: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.44rem;
+  color: rgba(200, 200, 180, 0.75);
+}
+
+@keyframes saturn-medal-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+@media (max-width: 640px) {
+  .saturn-scholar {
+    top: calc(50vh + 140px);
+  }
+}

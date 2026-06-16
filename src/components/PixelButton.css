@@ -1,0 +1,70 @@
+.pixel-btn {
+  font-family: var(--font-pixel);
+  font-size: 0.5rem;
+  letter-spacing: 0.06em;
+  line-height: 1.6;
+  text-transform: uppercase;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--color-text);
+  transition: transform 0.1s steps(2);
+}
+
+.pixel-btn__face {
+  display: block;
+  padding: 10px 16px;
+  border: 2px solid var(--color-metal-dim);
+  background: var(--color-panel);
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.55);
+}
+
+.pixel-btn--primary .pixel-btn__face {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  background: var(--color-accent-dim);
+}
+
+.pixel-btn--primary:hover .pixel-btn__face {
+  box-shadow: 0 0 12px var(--color-accent-glow), 3px 3px 0 rgba(0, 0, 0, 0.55);
+}
+
+.pixel-btn--alert .pixel-btn__face {
+  border-color: var(--color-accent);
+  color: var(--color-text);
+  background: linear-gradient(180deg, rgba(255, 122, 47, 0.25), rgba(255, 122, 47, 0.08));
+  font-size: 0.55rem;
+}
+
+.pixel-btn--alert:hover .pixel-btn__face {
+  box-shadow: 0 0 20px var(--color-accent-glow), 3px 3px 0 rgba(0, 0, 0, 0.55);
+}
+
+.pixel-btn--ghost .pixel-btn__face {
+  border-color: var(--color-metal-dim);
+  color: var(--color-metal);
+  background: rgba(5, 8, 18, 0.5);
+}
+
+.pixel-btn--ghost:hover .pixel-btn__face {
+  color: var(--color-text);
+  border-color: var(--color-metal);
+}
+
+.pixel-btn--lg .pixel-btn__face {
+  padding: 16px 24px;
+  font-size: 0.55rem;
+}
+
+.pixel-btn--sm .pixel-btn__face {
+  padding: 6px 10px;
+  font-size: 0.42rem;
+}
+
+.pixel-btn:active {
+  transform: translate(2px, 2px);
+}
+
+.pixel-btn:active .pixel-btn__face {
+  box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.55);
+}

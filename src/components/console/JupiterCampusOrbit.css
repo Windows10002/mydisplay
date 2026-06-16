@@ -1,0 +1,185 @@
+/* 外层 archive 会被 pdp 重置 transform，居中放在 __hub 内 */
+.jupiter-orbit {
+  position: fixed;
+  inset: 0;
+  z-index: 13;
+  pointer-events: none;
+}
+
+.jupiter-orbit__hub {
+  position: absolute;
+  left: 50%;
+  top: 42%;
+  width: 0;
+  height: 0;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.jupiter-orbit__track {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: calc(var(--orbit-r, 200px) * 2);
+  height: calc(var(--orbit-r, 200px) * 2);
+  margin-left: calc(var(--orbit-r, 200px) * -1);
+  margin-top: calc(var(--orbit-r, 200px) * -1);
+  border: 1px dashed rgba(184, 137, 90, 0.32);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.jupiter-orbit__ring {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 0;
+  height: 0;
+  animation: jupiter-orbit-spin 36s linear infinite;
+}
+
+.jupiter-moon {
+  position: absolute;
+  left: 0;
+  top: 0;
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  pointer-events: auto;
+  transform: rotate(var(--angle)) translateX(var(--orbit-r, 200px));
+  transform-origin: 0 0;
+}
+
+.jupiter-moon__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  transform: translate(-50%, -50%);
+  animation: jupiter-orbit-spin-reverse 36s linear infinite;
+}
+
+.jupiter-moon__pixel {
+  display: block;
+  width: 28px;
+  height: 28px;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  filter: drop-shadow(0 2px 0 rgba(0, 0, 0, 0.5));
+  transition: transform 0.15s steps(2);
+}
+
+.jupiter-moon.is-active .jupiter-moon__pixel,
+.jupiter-moon:hover .jupiter-moon__pixel {
+  transform: scale(1.2);
+  filter: drop-shadow(0 0 8px rgba(255, 184, 74, 0.55));
+}
+
+.jupiter-moon__label {
+  max-width: 11em;
+  font-family: var(--font-mono);
+  font-size: 0.46rem;
+  line-height: 1.4;
+  letter-spacing: 0.03em;
+  color: #dcc8a0;
+  text-align: center;
+  text-shadow: 2px 2px 0 #000;
+  word-break: break-all;
+}
+
+.jupiter-moon.is-active .jupiter-moon__label {
+  color: #ffb84a;
+}
+
+.jupiter-orbit__story {
+  position: fixed;
+  left: 50%;
+  bottom: clamp(64px, 10vh, 96px);
+  transform: translateX(-50%);
+  width: min(420px, calc(100vw - 40px));
+  padding: 14px 16px;
+  pointer-events: none;
+  animation: jupiter-story-in 0.35s steps(4) forwards;
+}
+
+.jupiter-orbit__story-period {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.5rem;
+  color: #b8895a;
+  letter-spacing: 0.08em;
+  margin-bottom: 4px;
+}
+
+.jupiter-orbit__story-org {
+  margin: 0 0 4px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: #ffb84a;
+  letter-spacing: 0.06em;
+}
+
+.jupiter-orbit__story-role {
+  margin: 0 0 8px;
+  font-size: 0.58rem;
+  color: #dcc8a0;
+}
+
+.jupiter-orbit__story-detail {
+  margin: 0 0 10px;
+  font-size: 0.72rem;
+  line-height: 1.55;
+  color: rgba(212, 220, 232, 0.92);
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.8);
+}
+
+.jupiter-orbit__story-tags {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.jupiter-orbit__story-tags li {
+  padding: 4px 8px;
+  border: 1px solid rgba(184, 137, 90, 0.4);
+  background: rgba(40, 24, 8, 0.5);
+  font-family: var(--font-mono);
+  font-size: 0.48rem;
+  color: #dcc8a0;
+}
+
+@keyframes jupiter-orbit-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes jupiter-orbit-spin-reverse {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(-360deg); }
+}
+
+@keyframes jupiter-story-in {
+  from { opacity: 0; transform: translateX(-50%) translateY(8px); }
+  to { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+@media (max-width: 640px) {
+  .jupiter-orbit__hub {
+    --orbit-r: 140px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .jupiter-orbit__ring,
+  .jupiter-moon__inner {
+    animation: none;
+  }
+
+  .jupiter-moon__inner {
+    transform: translate(-50%, -50%);
+  }
+}

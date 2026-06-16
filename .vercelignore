@@ -1,0 +1,10 @@
+node_modules
+dist
+.git
+.DS_Store
+*.local
+.env*.local
+
+# 超大视频走外链或本地 dev；其余 Planets 静态资源仍随 CLI 上传
+Planets/*.mp4
+public/Planets/*.mp4

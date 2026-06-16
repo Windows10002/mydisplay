@@ -1,0 +1,73 @@
+.wormhole {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  background: #050812;
+}
+
+.wormhole--overlay {
+  z-index: 900;
+}
+
+.wormhole__canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  image-rendering: pixelated;
+}
+
+.wormhole__hud {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  gap: 12px;
+}
+
+.wormhole__text {
+  font-family: var(--font-pixel);
+  font-size: clamp(0.48rem, 1.4vw, 0.65rem);
+  letter-spacing: 0.14em;
+  color: var(--color-screen);
+  text-shadow: 0 0 12px rgba(38, 255, 152, 0.4);
+  animation: pixel-blink 0.7s steps(2) infinite;
+}
+
+.wormhole__text--sub {
+  font-size: 0.42rem;
+  color: var(--color-accent);
+  animation: none;
+}
+
+.wormhole__bars {
+  display: flex;
+  gap: 4px;
+  margin-top: 20px;
+}
+
+.wormhole__bar {
+  width: 8px;
+  height: 4px;
+  background: var(--color-accent);
+  animation: wormhole-bar 0.8s steps(3) infinite;
+}
+
+.wormhole--p2 .wormhole__hud {
+  opacity: 0;
+  transition: opacity 0.5s steps(4);
+}
+
+@keyframes pixel-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+
+@keyframes wormhole-bar {
+  0%, 100% { opacity: 0.3; transform: scaleX(0.6); }
+  50% { opacity: 1; transform: scaleX(1); }
+}

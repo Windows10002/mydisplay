@@ -1,0 +1,100 @@
+.mars-campfires {
+  position: fixed;
+  left: 50%;
+  bottom: 48px;
+  transform: translateX(-50%);
+  z-index: 13;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: clamp(14px, 4vw, 36px);
+  padding: 0 16px;
+  pointer-events: none;
+}
+
+.mars-campfires > * {
+  pointer-events: auto;
+}
+
+.mars-fire {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  max-width: min(120px, 22vw);
+}
+
+.mars-fire__canvas {
+  display: block;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  filter: drop-shadow(0 0 6px rgba(255, 122, 47, 0.25));
+}
+
+.mars-fire.is-burst .mars-fire__canvas {
+  filter: drop-shadow(0 0 14px rgba(255, 184, 74, 0.55));
+}
+
+.mars-fire__name {
+  font-family: var(--font-mono);
+  font-size: clamp(0.38rem, 1.8vw, 0.48rem);
+  line-height: 1.3;
+  color: #d87850;
+  text-align: center;
+  text-shadow: 1px 1px 0 #000;
+}
+
+.mars-fire.is-burst .mars-fire__name {
+  color: #ffb84a;
+}
+
+.mars-fire__info {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(200px, 80vw);
+  padding: 10px 12px;
+  border: 1px solid rgba(255, 122, 47, 0.4);
+  background: rgba(18, 8, 8, 0.92);
+  animation: mars-fire-info-in 0.3s steps(4) forwards;
+  pointer-events: none;
+  text-align: left;
+}
+
+@keyframes mars-fire-info-in {
+  from { opacity: 0; transform: translateX(-50%) translateY(8px); }
+  to { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+.mars-fire__info strong {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.48rem;
+  color: #ffb84a;
+  margin-bottom: 2px;
+}
+
+.mars-fire__year {
+  font-family: var(--font-mono);
+  font-size: 0.4rem;
+  color: #d87850;
+}
+
+.mars-fire__info p {
+  margin: 6px 0 0;
+  font-size: 0.58rem;
+  line-height: 1.4;
+  color: #9aa8b8;
+}
+
+@media (max-width: 640px) {
+  .mars-campfires {
+    gap: 8px;
+  }
+}

@@ -1,0 +1,11 @@
+node_modules
+dist
+dist-ssr
+*.local
+.DS_Store
+.vercel
+
+# 大体积本地素材（保留在磁盘，Vercel CLI 部署时仍会上传）
+Planets/
+public/Planets/
+public/assets/intro-pixel.mp4

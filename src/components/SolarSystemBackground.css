@@ -1,0 +1,11 @@
+.solar-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.solar-bg--pixel {
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}

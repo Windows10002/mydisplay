@@ -1,0 +1,129 @@
+.pixel-dome {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.pixel-dome__btn {
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.pixel-dome__btn:not(:disabled):hover .pixel-dome__sprite {
+  filter: brightness(1.05);
+}
+
+.pixel-dome--disabled .pixel-dome__btn {
+  cursor: not-allowed;
+  opacity: 0.5;
+  filter: grayscale(0.4);
+}
+
+.pixel-dome__sprite {
+  position: relative;
+  display: block;
+  transform-origin: center center;
+  transition: transform 0.12s steps(3), filter 0.12s steps(3);
+}
+
+.pixel-dome__btn.is-pressed .pixel-dome__sprite {
+  transform: scale(0.86);
+  filter: brightness(0.82);
+}
+
+.pixel-dome__canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+.pixel-dome__face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+  pointer-events: none;
+  transform-origin: center center;
+  transition: transform 0.12s steps(3), opacity 0.12s steps(3);
+}
+
+.pixel-dome__btn.is-pressed .pixel-dome__face {
+  transform: scale(0.92);
+  opacity: 0.92;
+}
+
+.pixel-dome__label {
+  font-family: var(--font-pixel);
+  font-size: 0.42rem;
+  letter-spacing: 0.14em;
+  color: #3a1808;
+  text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.pixel-dome__mark {
+  font-family: var(--font-pixel);
+  font-size: 0.28rem;
+  letter-spacing: 0.12em;
+  color: #5a4020;
+}
+
+.pixel-dome__sub {
+  font-family: var(--font-mono);
+  font-size: 0.48rem;
+  letter-spacing: 0.08em;
+  color: #9aa8b8;
+  text-align: center;
+  line-height: 1.4;
+}
+
+.pixel-dome__hint {
+  font-family: var(--font-sans);
+  font-size: 0.58rem;
+  color: #80e8ff;
+  text-align: center;
+}
+
+/* 太阳中心 45vh，日冕半径约 200px → 按钮放在日冕下方 */
+.pixel-dome--under-sun {
+  position: fixed;
+  left: 50%;
+  top: calc(45vh + 13.5rem);
+  transform: translateX(-50%);
+  z-index: 14;
+  pointer-events: none;
+}
+
+.pixel-dome--under-sun .pixel-dome__btn {
+  pointer-events: auto;
+}
+
+.pixel-dome--under-sun .pixel-dome__sub,
+.pixel-dome--under-sun .pixel-dome__hint {
+  pointer-events: none;
+}
+
+@media (max-width: 720px) {
+  .pixel-dome--under-sun {
+    top: calc(45vh + 12rem);
+  }
+}
+
+@media (min-height: 900px) {
+  .pixel-dome--under-sun {
+    top: calc(45vh + 14.5rem);
+  }
+}
+
+@media (max-height: 640px) {
+  .pixel-dome--under-sun {
+    top: calc(45vh + 11rem);
+  }
+}

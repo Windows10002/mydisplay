@@ -1,0 +1,63 @@
+.intro-blackout {
+  position: fixed;
+  inset: 0;
+  z-index: 920;
+  background: #000;
+  pointer-events: auto;
+}
+
+.intro-blackout--terminal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  animation: intro-fade-in 0.35s steps(4) forwards;
+}
+
+.intro-blackout__panel {
+  width: min(640px, 100%);
+  border: 3px solid var(--phosphor, #c9a84c);
+  background: #0a0a08;
+  box-shadow:
+    0 0 40px rgba(201, 168, 76, 0.25),
+    inset 0 0 30px rgba(0, 0, 0, 0.8);
+}
+
+.intro-blackout__header {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--bezel, #3a3a32);
+  font-family: var(--font-mono);
+  font-size: 0.52rem;
+  letter-spacing: 0.14em;
+  color: var(--crt-green-bright, #78b080);
+}
+
+.intro-blackout__blink {
+  color: var(--warn, #c05830);
+  animation: led-blink 0.8s steps(2) infinite;
+}
+
+.intro-blackout__screen {
+  padding: 16px 14px 20px;
+  min-height: 200px;
+}
+
+.intro-blackout__line {
+  font-family: var(--font-mono);
+  font-size: clamp(0.72rem, 2.2vw, 0.88rem);
+  color: var(--phosphor-bright, #e8cc78);
+  line-height: 1.55;
+  margin-bottom: 6px;
+}
+
+.intro-blackout__cursor {
+  color: var(--phosphor, #c9a84c);
+  animation: led-blink 0.65s steps(2) infinite;
+}
+
+@keyframes intro-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

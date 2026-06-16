@@ -1,0 +1,93 @@
+.mars-projector {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 13;
+  pointer-events: none;
+}
+
+.mars-projector__stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  pointer-events: auto;
+}
+
+.mars-projector__hit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.mars-projector__scene {
+  display: block;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  filter: drop-shadow(0 8px 0 rgba(0, 0, 0, 0.45));
+}
+
+.mars-projector__hit:hover .mars-projector__scene {
+  transform: translateY(-2px);
+}
+
+.mars-projector.is-playing .mars-projector__scene {
+  filter: drop-shadow(0 0 16px rgba(255, 120, 60, 0.35)) drop-shadow(0 8px 0 rgba(0, 0, 0, 0.45));
+}
+
+.mars-projector__hint {
+  font-family: var(--font-mono);
+  font-size: clamp(0.58rem, 2.8vw, 0.72rem);
+  letter-spacing: 0.06em;
+  color: #ffb84a;
+  text-shadow: 2px 2px 0 #000, 0 0 12px rgba(255, 120, 60, 0.35);
+}
+
+.mars-projector__subhint {
+  font-family: var(--font-mono);
+  font-size: clamp(0.48rem, 2.2vw, 0.56rem);
+  color: #d87850;
+  text-shadow: 1px 1px 0 #000;
+}
+
+.mars-projector__controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-mono);
+  font-size: 0.54rem;
+  color: #ffb84a;
+}
+
+.mars-projector__controls button {
+  padding: 6px 12px;
+  border: 1px solid rgba(216, 120, 80, 0.5);
+  background: rgba(24, 10, 8, 0.85);
+  color: #d87850;
+  cursor: pointer;
+}
+
+.mars-projector__controls button:hover {
+  border-color: #ffb84a;
+  color: #ffb84a;
+}
+
+.mars-projector__stop {
+  padding: 6px 14px;
+  border: 1px solid rgba(154, 168, 184, 0.35);
+  background: rgba(8, 8, 12, 0.8);
+  font-family: var(--font-mono);
+  font-size: 0.48rem;
+  color: #9aa8b8;
+  cursor: pointer;
+}
+
+.mars-projector__stop:hover {
+  color: #d4dce8;
+}

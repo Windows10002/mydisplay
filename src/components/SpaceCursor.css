@@ -1,0 +1,18 @@
+.space-cursor__canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  pointer-events: none;
+}
+
+.space-cursor__canvas--pixel {
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  mix-blend-mode: screen;
+  opacity: 0.95;
+}
+
+body.console-page:not(.cursor-solar-explorer) .space-cursor__canvas--pixel {
+  mix-blend-mode: normal;
+  opacity: 0.98;
+}

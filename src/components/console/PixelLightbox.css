@@ -1,0 +1,77 @@
+.pixel-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.pixel-lightbox__backdrop {
+  position: absolute;
+  inset: 0;
+  border: none;
+  background: rgba(0, 0, 0, 0.82);
+  cursor: pointer;
+}
+
+.pixel-lightbox__frame {
+  position: relative;
+  z-index: 1;
+  max-width: min(920px, 96vw);
+  max-height: 90vh;
+  padding: 12px;
+  border: 2px solid rgba(128, 232, 255, 0.45);
+  background: rgba(8, 12, 24, 0.95);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.5), 0 8px 32px rgba(0, 0, 0, 0.6);
+  animation: pixel-lightbox-in 0.25s steps(4) forwards;
+}
+
+.pixel-lightbox__img {
+  display: block;
+  max-width: 100%;
+  max-height: calc(90vh - 80px);
+  object-fit: contain;
+  image-rendering: auto;
+}
+
+.pixel-lightbox__nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 10px;
+  font-family: var(--font-mono);
+  font-size: 0.52rem;
+  color: #80e8ff;
+}
+
+.pixel-lightbox__nav button {
+  width: 28px;
+  height: 28px;
+  border: 1px solid rgba(128, 232, 255, 0.4);
+  background: rgba(16, 32, 56, 0.8);
+  color: #d4dce8;
+  cursor: pointer;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.pixel-lightbox__close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 4px 8px;
+  border: 1px solid rgba(154, 168, 184, 0.35);
+  background: rgba(8, 12, 24, 0.9);
+  font-family: var(--font-mono);
+  font-size: 0.42rem;
+  color: #9aa8b8;
+  cursor: pointer;
+}
+
+@keyframes pixel-lightbox-in {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}

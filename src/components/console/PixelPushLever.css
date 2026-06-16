@@ -1,0 +1,93 @@
+/* ── 双油门推杆 ── */
+.pixel-lever {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.pixel-lever__control {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.pixel-lever--disabled .pixel-lever__control {
+  cursor: not-allowed;
+  opacity: 0.5;
+  filter: grayscale(0.35);
+}
+
+.pixel-lever__sprite {
+  display: block;
+}
+
+.pixel-lever__canvas {
+  display: block;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+.pixel-lever__label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  color: var(--phosphor-bright, #e8cc78);
+  text-shadow: 2px 2px 0 #000;
+}
+
+.pixel-lever--lg .pixel-lever__label {
+  font-size: 0.78rem;
+}
+
+.pixel-lever__engage-tag {
+  font-family: var(--font-mono);
+  font-size: 0.42rem;
+  letter-spacing: 0.14em;
+  color: #26ff98;
+  opacity: 0;
+  transition: opacity 0.15s steps(2);
+}
+
+.pixel-lever__control.is-pushed .pixel-lever__engage-tag,
+.pixel-lever--armed:hover .pixel-lever__engage-tag {
+  opacity: 1;
+}
+
+.pixel-lever__sub {
+  font-family: var(--font-mono);
+  font-size: 0.48rem;
+  letter-spacing: 0.1em;
+  color: var(--phosphor-dim, #7a6840);
+  text-align: center;
+}
+
+.pixel-lever__hint {
+  font-family: var(--font-sans);
+  font-size: 0.62rem;
+  color: var(--crt-green-bright, #78b080);
+  text-align: center;
+}
+
+.pixel-lever--planet {
+  position: fixed;
+  left: 50%;
+  bottom: 56px;
+  transform: translateX(-50%);
+  z-index: 14;
+  width: auto;
+}
+
+.pixel-lever--planet .pixel-lever__label {
+  color: #80e8ff;
+}
+
+.pixel-lever--planet .pixel-lever__sub {
+  color: #9aa8b8;
+}
